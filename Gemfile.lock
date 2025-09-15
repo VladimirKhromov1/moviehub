@@ -74,6 +74,7 @@ GEM
       uri (>= 0.13.1)
     ast (2.4.3)
     base64 (0.3.0)
+    bcrypt (3.1.20)
     bcrypt_pbkdf (1.1.1)
     bcrypt_pbkdf (1.1.1-arm64-darwin)
     bcrypt_pbkdf (1.1.1-x86_64-darwin)
@@ -111,6 +112,8 @@ GEM
       rdoc (>= 4.0.0)
       reline (>= 0.4.2)
     json (2.13.2)
+    jwt (2.10.2)
+      base64
     kamal (2.7.0)
       activesupport (>= 7.0)
       base64 (~> 0.2)
@@ -233,6 +236,10 @@ GEM
     rdoc (6.14.2)
       erb
       psych (>= 4.0.0)
+    redis (5.4.1)
+      redis-client (>= 0.22.0)
+    redis-client (0.25.1)
+      connection_pool
     regexp_parser (2.11.3)
     reline (0.6.2)
       io-console (~> 0.5)
@@ -266,6 +273,12 @@ GEM
       rubocop-rails (>= 2.30)
     ruby-progressbar (1.13.0)
     securerandom (0.4.1)
+    sidekiq (7.3.9)
+      base64
+      connection_pool (>= 2.3.0)
+      logger
+      rack (>= 2.2.4)
+      redis-client (>= 0.22.2)
     solid_cable (3.0.12)
       actioncable (>= 7.2)
       activejob (>= 7.2)
@@ -323,14 +336,18 @@ PLATFORMS
   x86_64-linux-musl
 
 DEPENDENCIES
+  bcrypt (~> 3.1.7)
   bootsnap
   brakeman
   debug
+  jwt
   kamal
   pg (~> 1.1)
   puma (>= 5.0)
   rails (~> 8.0.2, >= 8.0.2.1)
+  redis
   rubocop-rails-omakase
+  sidekiq
   solid_cable
   solid_cache
   solid_queue
