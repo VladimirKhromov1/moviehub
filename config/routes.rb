@@ -6,6 +6,13 @@ Rails.application.routes.draw do
   namespace :api, defaults: { format: :json } do
     namespace :v1 do
       get 'health', to: 'health#index'
+
+      namespace 'auth' do
+        post 'register'
+        post 'login'
+        delete 'logout'
+        get 'me'
+      end
     end
   end
 
