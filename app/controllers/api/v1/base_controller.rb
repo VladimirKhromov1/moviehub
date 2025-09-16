@@ -1,8 +1,6 @@
 class Api::V1::BaseController < ApplicationController
   include ActionController::Cookies
 
-  skip_before_action :verify_authenticity_token
-
   private
 
   def set_auth_cookie(token)
