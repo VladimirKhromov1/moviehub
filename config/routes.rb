@@ -13,6 +13,8 @@ Rails.application.routes.draw do
         delete 'logout'
         get 'me'
       end
+
+      resources :movies, only: [:index, :show]
     end
   end
 
