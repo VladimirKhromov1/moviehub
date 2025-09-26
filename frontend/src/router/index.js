@@ -23,6 +23,11 @@ const router = createRouter({
       name: 'register',
       component: RegisterView,
       meta: { requiresGuest: true }
+    },
+    {
+      path: '/movies',
+      name: 'movies',
+      component: () => import('../views/MoviesView.vue')
     }
   ]
 })

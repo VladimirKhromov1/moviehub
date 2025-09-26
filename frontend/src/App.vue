@@ -26,6 +26,7 @@ async function handleLogout() {
 
         <nav class="nav-menu">
           <template v-if="authStore.isAuthenticated">
+            <router-link to="/movies" class="nav-link">Movies</router-link>
             <span class="user-info">
               Welcome, {{ authStore.user?.email }}
             </span>
