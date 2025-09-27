@@ -8,7 +8,11 @@ class Api::V1::AuthController < Api::V1::BaseController
 
       render json: {
         message: 'User created successfully',
-        user: { id: user.id, email: user.email }
+        user: {
+          id: user.id,
+          email: user.email,
+          default_lists: user.user_lists.pluck(:name)
+        }
       }, status: :created
     else
       render json: { errors: user.errors.full_messages }, status: :unprocessable_entity
@@ -50,13 +54,4 @@ class Api::V1::AuthController < Api::V1::BaseController
     params.permit(:email, :password, :password_confirmation)
   end
 
-  def current_user
-    return @current_user if defined?(@current_user)
-
-    token = current_user_token
-    return nil unless token
-
-    decoded_token = JwtService.decode(token)
-    @current_user = decoded_token ? User.find_by(id: decoded_token[:user_id]) : nil
-  end
 end

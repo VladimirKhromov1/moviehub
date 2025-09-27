@@ -14,7 +14,16 @@ Rails.application.routes.draw do
         get 'me'
       end
 
-      resources :movies, only: [:index, :show]
+      resources :movies, only: [:index, :show] do
+        collection do
+          get :best_films
+        end
+
+        member do
+          post 'like', to: 'likes#create'
+          delete 'like', to: 'likes#destroy'
+        end
+      end
     end
   end
 
