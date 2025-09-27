@@ -14,8 +14,8 @@ const authStore = useAuthStore()
           Hello {{ authStore.user?.email }}! Ready to explore movies?
         </p>
         <div class="action-buttons">
-          <button class="cta-button">Browse Movies</button>
-          <button class="cta-button secondary">My Lists</button>
+          <router-link to="/movies" class="cta-button">Browse Movies</router-link>
+          <router-link to="/best-films" class="cta-button secondary">Best Films</router-link>
         </div>
       </div>
 
