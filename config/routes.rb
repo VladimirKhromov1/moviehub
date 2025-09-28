@@ -17,6 +17,8 @@ Rails.application.routes.draw do
       resources :movies, only: [:index, :show] do
         collection do
           get :best_films
+          get :genres
+          get :filter_stats
         end
 
         member do
