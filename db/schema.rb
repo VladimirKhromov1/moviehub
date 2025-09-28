@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_09_27_183749) do
+ActiveRecord::Schema[8.0].define(version: 2025_09_28_195829) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -63,6 +63,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_09_27_183749) do
     t.integer "likes_count", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index "to_tsvector('english'::regconfig, (((title)::text || ' '::text) || COALESCE(description, ''::text)))", name: "movies_search_gin_idx", using: :gin
+    t.index ["rating", "release_date"], name: "movies_rating_date_idx"
     t.index ["rating"], name: "index_movies_on_rating"
     t.index ["release_date"], name: "index_movies_on_release_date"
     t.index ["tmdb_id"], name: "index_movies_on_tmdb_id", unique: true
