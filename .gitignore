@@ -33,3 +33,15 @@ Gemfile.lock
 
 # Ignore Redis dump files
 dump.rdb
+
+# Frontend (Node.js/npm)
+frontend/node_modules/
+frontend/package-lock.json
+frontend/dist/
+frontend/.env*
+frontend/.vite/
+
+# Build and temp files
+frontend/coverage/
+frontend/.nyc_output/
+frontend/.cache/
