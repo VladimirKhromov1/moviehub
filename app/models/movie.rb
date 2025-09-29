@@ -61,7 +61,7 @@ class Movie < ApplicationRecord
     when 'title', 'alphabetical'
       order(:title)
     else
-      order(created_at: :desc, title: :asc) # Стабильная сортировка
+      order(created_at: :desc, title: :asc)
     end
   }
 
