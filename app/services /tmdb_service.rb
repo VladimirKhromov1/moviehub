@@ -14,7 +14,7 @@ class TmdbService
     end
 
     def poster_url(poster_path)
-      "https://image.tmdb.org/t/p/w500#{poster_path}" if poster_path
+      "https://image.tmdb.org/t/p/w500#{poster_path}" if poster_path.present?
     end
 
     private
@@ -26,12 +26,13 @@ class TmdbService
 
       raise "TMDB API Error" unless response.success?
       JSON.parse(response.body)
+    rescue Faraday::Error => e
+      raise "TMDB API Error"
     end
 
     def connection
       @connection ||= Faraday.new(url: BASE_URL) do |faraday|
         faraday.params['api_key'] = API_KEY
-        faraday.response :raise_error
         faraday.adapter Faraday.default_adapter
       end
     end
