@@ -19,8 +19,8 @@ rescue ActiveRecord::PendingMigrationError => e
   abort e.to_s.strip
 end
 RSpec.configure do |config|
-  # Disable transactional fixtures to use DatabaseCleaner
-  config.use_transactional_fixtures = false
+  # Use transactional fixtures for better performance
+  config.use_transactional_fixtures = true
 
   # Automatically infer spec type from file location
   config.infer_spec_type_from_file_location!
@@ -37,17 +37,6 @@ RSpec.configure do |config|
   # Configure Shoulda Matchers
   config.include(Shoulda::Matchers::ActiveModel, type: :model)
   config.include(Shoulda::Matchers::ActiveRecord, type: :model)
-
-  # Configure DatabaseCleaner
-  config.before(:each) do
-    DatabaseCleaner.strategy = :transaction
-    DatabaseCleaner.start
-  end
-
-  config.after(:each) do
-    DatabaseCleaner.clean
-    travel_back
-  end
 end
 
 # Shoulda Matchers configuration
