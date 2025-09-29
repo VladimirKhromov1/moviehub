@@ -27,8 +27,8 @@ export const useMoviesStore = defineStore('movies', {
   getters: {
     hasActiveFilters: (state) => {
       return !!(
-        state.filters.search ||
-        state.filters.genres.length > 0 ||
+        state.filters.search?.trim() ||
+        state.filters.genres?.length > 0 ||
         state.filters.min_rating ||
         state.filters.year ||
         (state.filters.sort_by && state.filters.sort_by !== 'created_at')
@@ -45,7 +45,11 @@ export const useMoviesStore = defineStore('movies', {
 
   actions: {
     async fetchMovies(page = 1, perPage = 20, customFilters = null) {
-      this.loading = true
+      const isFiltering = !!customFilters
+
+      if (!isFiltering) {
+        this.loading = true
+      }
       this.error = null
 
       try {
@@ -88,7 +92,7 @@ export const useMoviesStore = defineStore('movies', {
     },
 
     async fetchGenres() {
-      if (this.genres.length > 0) return // Кэширование
+      if (this.genres.length > 0) return
 
       this.genresLoading = true
       try {
@@ -101,25 +105,9 @@ export const useMoviesStore = defineStore('movies', {
       }
     },
 
-    async searchMovies(newFilters = {}) {
-      const mergedFilters = { ...this.filters, ...newFilters }
-      await this.fetchMovies(1, 20, mergedFilters)
-    },
-
     async applyFilters(filters) {
-      this.filters = { ...this.filters, ...filters }
-      await this.fetchMovies(1, 20, this.filters)
-    },
-
-    clearFilters() {
-      this.filters = {
-        search: '',
-        genres: [],
-        min_rating: null,
-        year: null,
-        sort_by: 'created_at'
-      }
-      this.fetchMovies(1, 20, this.filters)
+      this.filters = { ...filters }
+      await this.fetchMovies(1, 20, filters)
     },
 
     async toggleLike(movieId) {
