@@ -65,4 +65,5 @@ group :test do
   # Testing utilities
   gem 'shoulda-matchers', '~> 6.4'
   gem 'webmock', '~> 3.23'
+  gem 'database_cleaner-active_record', '~> 2.1'
 end
