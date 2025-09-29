@@ -84,8 +84,8 @@ class Movie < ApplicationRecord
   def self.filter_stats
     {
       total_count: count,
-      years: distinct.pluck('EXTRACT(year FROM release_date)').compact.sort.reverse,
-      rating_ranges: group('FLOOR(rating)').count.transform_keys(&:to_i)
+      years: distinct.pluck(Arel.sql('EXTRACT(year FROM release_date)')).compact.sort.reverse,
+      rating_ranges: group(Arel.sql('FLOOR(rating)')).count.transform_keys(&:to_i)
     }
   end
 end
