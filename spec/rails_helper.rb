@@ -37,6 +37,18 @@ RSpec.configure do |config|
   config.include(Shoulda::Matchers::ActiveModel, type: :model)
   config.include(Shoulda::Matchers::ActiveRecord, type: :model)
 
+  # Ensure test DB starts clean (affects TEST DB only)
+  config.before(:suite) do
+    if Rails.env.test?
+      connection = ActiveRecord::Base.connection
+      connection.disable_referential_integrity do
+        tables = connection.tables - %w[schema_migrations ar_internal_metadata]
+        tables.each do |table|
+          connection.execute("TRUNCATE TABLE #{table} RESTART IDENTITY CASCADE")
+        end
+      end
+    end
+  end
 end
 
 # Shoulda Matchers configuration
