@@ -69,7 +69,7 @@ docker-compose exec frontend npm test --silent
 - **Backend**: RSpec suite covers models, controllers, services
 - **Frontend**: Jest suite covers components, stores, services
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 ├── app/                 # Rails API
