@@ -8,9 +8,10 @@ Sidekiq.configure_server do |config|
   
   config.on(:startup) do
     Sidekiq::Cron::Job.create(
-      name: 'Daily Movie Sync',
-      cron: '0 3 * * *',
-      class: 'SyncMoviesJob'
+      name: 'Weekly Movie Sync',
+      cron: '0 3 * * 1',
+      class: 'SyncMoviesJob',
+      args: [{ pages: 2 }]
     )
   end
 end
