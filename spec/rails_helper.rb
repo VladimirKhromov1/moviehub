@@ -8,7 +8,6 @@ require 'rspec/rails'
 # Add additional requires below this line. Rails is not loaded until this point!
 require 'shoulda/matchers'
 require 'webmock/rspec'
-require 'database_cleaner/active_record'
 
 Rails.root.glob('spec/support/**/*.rb').sort_by(&:to_s).each { |f| require f }
 
@@ -37,6 +36,7 @@ RSpec.configure do |config|
   # Configure Shoulda Matchers
   config.include(Shoulda::Matchers::ActiveModel, type: :model)
   config.include(Shoulda::Matchers::ActiveRecord, type: :model)
+
 end
 
 # Shoulda Matchers configuration
