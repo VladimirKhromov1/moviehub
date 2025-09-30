@@ -1,7 +1,6 @@
 # Skip seeding in test environment
 unless Rails.env.test?
-  # Sync initial data if database is empty
-  if Movie.count.zero?
+  if Movie.count.zero? && Rails.application.credentials.tmdb_api_key.present?
     SyncMoviesJob.perform_now(pages: 10)
   end
 end
