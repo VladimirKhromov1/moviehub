@@ -12,12 +12,16 @@ const error = ref(null)
 
 async function handleLogin() {
   error.value = null
-  const result = await authStore.login(email.value, password.value)
+  try {
+    const result = await authStore.login(email.value, password.value)
 
-  if (result.success) {
-    router.push('/')
-  } else {
-    error.value = result.error
+    if (result.success) {
+      router.push('/')
+    } else {
+      error.value = result.error
+    }
+  } catch (err) {
+    error.value = err.message
   }
 }
 </script>
