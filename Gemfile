@@ -63,6 +63,6 @@ end
 
 group :test do
   # Testing utilities
-  gem 'shoulda-matchers', '~> 6.4'
+  gem 'shoulda-matchers', '~> 7.0'
   gem 'webmock', '~> 3.23'
 end
